@@ -1,46 +1,48 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> // For memory allocation functions like malloc() and free().
 
 // Node structure
 struct Node {
-    int data;
-    struct Node* next;
+    int data; // To store the integer value.
+    struct Node* next; // A pointer to the next node in the list.
 };
 
 // Function to create a new node
 struct Node* createNode(int value) {
+    // Allocate memory for a new node.
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = value;
-    newNode->next = NULL;
-    return newNode;
+    newNode->data = value; // Set the node's data.
+    newNode->next = NULL; // The new node's 'next' pointer is initially NULL because it's the last node.
+    return newNode; // Return the newly created node.
 }
 
 // Function to display the linked list
 void display(struct Node* head) {
-    struct Node* temp = head;
+    struct Node* temp = head; // Start from the head of the list.
     if (temp == NULL) {
         printf("List is empty\n");
         return;
     }
     printf("Linked List: ");
-    while (temp != NULL) {
-        printf("%d ", temp->data);
-        temp = temp->next;
+    while (temp != NULL) { // Traverse until the end of the list (where 'next' is NULL).
+        printf("%d ", temp->data); // Print the data of the current node.
+        temp = temp->next; // Move to the next node.
     }
     printf("\n");
 }
 
 // Function to insert node at the end
 struct Node* insertEnd(struct Node* head, int value) {
-    struct Node* newNode = createNode(value);
+    struct Node* newNode = createNode(value); // Create the new node.
     if (head == NULL) {
+        // If the list is empty, the new node becomes the head.
         return newNode;
     }
-    struct Node* temp = head;
-    while (temp->next != NULL)
+    struct Node* temp = head; // Start from the head.
+    while (temp->next != NULL) // Traverse to the last node.
         temp = temp->next;
-    temp->next = newNode;
-    return head;
+    temp->next = newNode; // Link the last node's 'next' pointer to the new node.
+    return head; // Return the head of the list.
 }
 
 // Function to delete first node
@@ -49,16 +51,16 @@ struct Node* deleteFirst(struct Node* head) {
         printf("List is empty. Cannot delete.\n");
         return NULL;
     }
-    struct Node* temp = head;
-    head = head->next;
-    printf("Deleted: %d\n", temp->data);
-    free(temp);
-    return head;
+    struct Node* temp = head; // Temporarily store the current head.
+    head = head->next; // Move the head pointer to the second node.
+    printf("Deleted: %d\n", temp->data); // Print the data of the deleted node.
+    free(temp); // Free the memory of the old head node to prevent memory leaks.
+    return head; // Return the new head.
 }
 
 int main() {
-    struct Node* head = NULL;
-    int value = 13; // start with multiple of 13
+    struct Node* head = NULL; // Initially, the list is empty, so head is NULL.
+    int value = 13;
 
     // Insert 5 nodes (multiples of 13)
     for (int i = 0; i < 5; i++) {
@@ -67,7 +69,6 @@ int main() {
         value += 13;
     }
 
-    // Display list
     display(head);
 
     // Delete first 2 nodes
@@ -75,9 +76,7 @@ int main() {
     head = deleteFirst(head);
     head = deleteFirst(head);
 
-    // Display list again
     display(head);
 
     return 0;
 }
-
