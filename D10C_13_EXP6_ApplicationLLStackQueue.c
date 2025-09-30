@@ -1,4 +1,4 @@
-nclude <stdio.h>  // Standard input-output library for functions like printf, scanf
+#include <stdio.h>  // Standard input-output library for functions like printf, scanf
 #include <stdlib.h> // Standard library for general utilities, including memory allocation (malloc, free, exit)
 #include <string.h> // String manipulation functions (e.g., strcpy)
 
