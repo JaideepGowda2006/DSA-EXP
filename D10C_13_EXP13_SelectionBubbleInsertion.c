@@ -2,7 +2,7 @@
 
 #define SIZE 5
 
-// Swap function
+// Utility function to swap two integers
 void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
@@ -11,19 +11,25 @@ void swap(int *a, int *b) {
 
 // Selection Sort
 void selectionSort(int arr[], int n) {
+    // This algorithm works by repeatedly finding the minimum element from the unsorted part
+    // and putting it at the beginning.
     for (int i = 0; i < n-1; i++) {
+        // Find the minimum element in the unsorted array arr[i..n-1]
         int min_idx = i;
         for (int j = i+1; j < n; j++)
             if (arr[j] < arr[min_idx])
                 min_idx = j;
+        // Swap the found minimum element with the first element of the unsorted part.
         swap(&arr[i], &arr[min_idx]);
     }
 }
 
 // Bubble Sort
 void bubbleSort(int arr[], int n) {
-    for (int i = 0; i < n-1; i++) {
-        for (int j = 0; j < n-i-1; j++) {
+    // This algorithm repeatedly steps through the list, compares adjacent elements,
+    // and swaps them if they are in the wrong order. The largest elements "bubble" to the top.
+    for (int i = 0; i < n-1; i++) { // The outer loop controls the number of passes.
+        for (int j = 0; j < n-i-1; j++) { // The inner loop performs the comparisons.
             if (arr[j] > arr[j+1])
                 swap(&arr[j], &arr[j+1]);
         }
@@ -32,18 +38,23 @@ void bubbleSort(int arr[], int n) {
 
 // Insertion Sort
 void insertionSort(int arr[], int n) {
+    // This algorithm builds the final sorted array one item at a time.
+    // It iterates through the input elements and inserts each element into its correct position
+    // in the sorted part of the array.
     for (int i = 1; i < n; i++) {
-        int key = arr[i];
+        int key = arr[i]; // Pick the element to be inserted.
         int j = i - 1;
+        // Move elements of arr[0..i-1], that are greater than key,
+        // to one position ahead of their current position.
         while (j >= 0 && arr[j] > key) {
             arr[j+1] = arr[j];
             j--;
         }
-        arr[j+1] = key;
+        arr[j+1] = key; // Place the key in its correct sorted position.
     }
 }
 
-// Display array
+// Function to display the array
 void display(int arr[], int n) {
     for (int i = 0; i < n; i++)
         printf("%d ", arr[i]);
@@ -51,10 +62,11 @@ void display(int arr[], int n) {
 }
 
 int main() {
-    int arr[SIZE] = {13, 39, 26, 65, 52}; // multiples of 13
+    int arr[SIZE] = {13, 39, 26, 65, 52};
     int choice;
 
     do {
+        // A menu-driven interface to let the user choose a sorting algorithm.
         printf("\nMenu:\n");
         printf("1. Selection Sort\n");
         printf("2. Bubble Sort\n");
@@ -91,4 +103,3 @@ int main() {
 
     return 0;
 }
-
